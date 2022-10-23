@@ -147,6 +147,7 @@ class DroneServiceImplTest {
         return RegisterDroneRequest.builder()
                 .serialNumber(serialNumber)
                 .battery(batteryLevel)
+                .model(DroneModel.Heavyweight.name())
                 .build();
     }
 
