@@ -50,7 +50,7 @@ public class DroneServiceImpl implements DroneService {
         // verification and get db data
         Drone drone=droneRepository.findById(request.getDroneSerialNumber()).orElseThrow(()->new DataNotValid(generalConstants.getSerialNumberAlreadyExists()));
 
-        if (new BigDecimal(generalConstants.getLowBatteryLevel()).compareTo(drone.getBattery()) >= 0) {
+        if (generalConstants.getLowBatteryLevel().compareTo(drone.getBattery()) >= 0) {
             throw new LowBatteryLevel(generalConstants.getLowBatteryLevelMessage());
         }
 

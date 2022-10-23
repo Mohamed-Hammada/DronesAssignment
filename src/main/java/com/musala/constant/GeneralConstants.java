@@ -4,6 +4,8 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Data
 @Component
 public class GeneralConstants {
@@ -17,7 +19,7 @@ public class GeneralConstants {
     @Value("${messages.exceed.drone.weight:more weight than the drone can carry}")
     private String exceedDroneWeight;
     @Value("${messages.battery.low:25}")
-    private double lowBatteryLevel;
+    private BigDecimal lowBatteryLevel;
     @Value("${messages.battery.low:Low Battery Level}")
     private String lowBatteryLevelMessage;
     @Value("${messages.max.drone.limit.weight:500}")
