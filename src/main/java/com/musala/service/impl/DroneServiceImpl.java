@@ -5,10 +5,7 @@ import com.musala.entity.Drone;
 import com.musala.entity.LoadMedication;
 import com.musala.entity.Medication;
 import com.musala.entity.enums.DroneState;
-import com.musala.exception.custom.DataNotFound;
-import com.musala.exception.custom.DataNotValid;
-import com.musala.exception.custom.ExceedDroneWeight;
-import com.musala.exception.custom.LowBatteryLevel;
+import com.musala.exception.custom.*;
 import com.musala.mapper.DroneMapper;
 import com.musala.mapper.MedicationMapper;
 import com.musala.payload.request.LoadDroneRequest;
@@ -39,7 +36,7 @@ public class DroneServiceImpl implements DroneService {
     @Override
     public RegisterDroneResponse registerDrone(RegisterDroneRequest request) {
         droneRepository.findById(request.getSerialNumber()).ifPresent(e->{
-            throw new DataNotValid(generalConstants.getSerialNumberAlreadyExists());
+            throw new DataAlreadyFound(generalConstants.getSerialNumberAlreadyExists());
         });
         return droneMapper.buildPayload(droneRepository.save(droneMapper.buildPayload(request)));
     }

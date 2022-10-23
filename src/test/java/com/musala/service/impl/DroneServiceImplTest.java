@@ -5,6 +5,7 @@ import com.musala.entity.Drone;
 import com.musala.entity.LoadMedication;
 import com.musala.entity.Medication;
 import com.musala.entity.enums.DroneModel;
+import com.musala.exception.custom.DataAlreadyFound;
 import com.musala.exception.custom.DataNotValid;
 import com.musala.exception.custom.ExceedDroneWeight;
 import com.musala.exception.custom.LowBatteryLevel;
@@ -57,7 +58,7 @@ class DroneServiceImplTest {
     private final String medicationName="medicationName";
     private final String targetLocationLatitude="targetLocationLatitude";
     private final String sourceLocationLatitude="sourceLocationLatitude";
-
+    private final double weight=400;
     @Test
     void registerDrone_SerialNumberAlreadyRegister() {
         RegisterDroneRequest request=getRegisterDroneRequest();
@@ -120,9 +121,9 @@ class DroneServiceImplTest {
     }
 
     @Test
-    void getDroneBatteryLevel_DataNotValid() {
+    void getDroneBatteryLevel_DataAlreadyFound() {
         given(droneRepository.findById(serialNumber)).willReturn(Optional.empty());
-        assertThrows(DataNotValid.class,()->droneService.getDroneBatteryLevel(serialNumber));
+        assertThrows(DataAlreadyFound.class,()->droneService.getDroneBatteryLevel(serialNumber));
     }
 
 
@@ -139,7 +140,7 @@ class DroneServiceImplTest {
     }
 
     private Medication getMedication() {
-        return Medication.builder().code(code).image(imageUrl).name(medicationName).weight(400).build();
+        return Medication.builder().code(code).image(imageUrl).name(medicationName).weight(weight).build();
     }
 
     private RegisterDroneRequest getRegisterDroneRequest() {

@@ -1,7 +1,7 @@
 package com.musala.service.impl;
 
 import com.musala.constant.GeneralConstants;
-import com.musala.exception.custom.DataNotFound;
+import com.musala.exception.custom.DataAlreadyFound;
 import com.musala.mapper.MedicationMapper;
 import com.musala.payload.request.CreateMedicationRequest;
 import com.musala.payload.response.CreateMedicationResponse;
@@ -21,7 +21,7 @@ public class MedicationServiceImpl implements MedicationService {
     @Override
     public CreateMedicationResponse createMedication(CreateMedicationRequest request) {
         medicationRepository.findById(request.getCode()).ifPresent(e->{
-            new DataNotFound(generalConstants.getMedicationNotExists());
+           throw new DataAlreadyFound(generalConstants.getMedicationNotExists());
         });
         return medicationMapper.buildPayload(medicationRepository.save(medicationMapper.buildPayload(request)));
     }
