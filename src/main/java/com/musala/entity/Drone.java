@@ -6,6 +6,9 @@ import com.musala.entity.enums.DroneState;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+import org.hibernate.envers.RelationTargetAuditMode;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -16,6 +19,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Audited
 @Entity
 @Table
 public class Drone {
@@ -24,10 +28,11 @@ public class Drone {
     private String serialNumber;
 
     @Enumerated(EnumType.STRING)
-
+    @NotAudited
     @Column(nullable=false)
     private DroneModel model;
 
+    @NotAudited
     @Range(min=0, max=500)
     @Column(nullable=false)
     private double currentWeight;
@@ -35,15 +40,18 @@ public class Drone {
     @Column(precision=5, scale=2)
     private BigDecimal battery;
 
+    @NotAudited
     @Enumerated(EnumType.STRING)
     @Column(nullable=false)
     @Builder.Default
     private DroneState state = DroneState.IDLE;
 
+    @NotAudited
     @Column(nullable=false)
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @NotAudited
     @Column(nullable=false, updatable=false)
     @CreationTimestamp
     private LocalDateTime createdAt;
