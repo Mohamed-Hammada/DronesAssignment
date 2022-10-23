@@ -18,6 +18,8 @@ public class GeneralConstants {
     private String serialNumberNotExists;
     @Value("${messages.exceed.drone.weight:more weight than the drone can carry}")
     private String exceedDroneWeight;
+    @Value("${messages.exceed.drone.length:100}")
+    private Double exceedDroneSerialNumberLength;
     @Value("${messages.battery.low:25}")
     private BigDecimal lowBatteryLevel;
     @Value("${messages.battery.low:Low Battery Level}")
