@@ -34,3 +34,13 @@ A database, **drones_db** has been created, and you can find for example battery
 ```
 SELECT * FROM `drone_aud`;
 ```
+
+## TODO
+- add spring state machine for Drone States
+- complete test cases
+- add jacoco and test coverage
+
+
+## Documentation
+[Swagger UI](http://localhost:8087/swagger-ui/index.html)
+[API Documentation](http://localhost:8087/api-docs)
